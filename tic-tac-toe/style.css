@@ -1,0 +1,67 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************/
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 602px;
+  height: 602px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+
+.box {
+  cursor: pointer;
+  margin: 0;
+  width: 200px;
+  height: 200px;
+  display: flex;
+}
+
+.box1,
+.box4,
+.box7 {
+  border-right: 1px solid black;
+}
+
+.box2,
+.box5,
+.box8 {
+  border-right: 1px solid black;
+}
+
+.box1,
+.box2,
+.box3 {
+  border-bottom: 1px solid black;
+}
+
+.box4,
+.box5,
+.box6 {
+  border-bottom: 1px solid black;
+}
