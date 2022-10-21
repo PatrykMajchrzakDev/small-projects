@@ -22,7 +22,6 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
   flex-direction: row;
   margin: 0 auto;
   width: 602px;
@@ -64,4 +63,9 @@ img {
 .box5,
 .box6 {
   border-bottom: 1px solid black;
+}
+
+h2 {
+  padding-top: 100px;
+  text-align: center;
 }
