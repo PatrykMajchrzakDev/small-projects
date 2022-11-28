@@ -4,22 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/94bc9126e2.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
     <title>Todo App</title>
   </head>
   <body>
     <h1>Welcome to your TODO list app</h1>
     <h2>Tasks:</h2>
-    <div></div>
-    <ul></ul>
+
+    <ul>
+      <% for(let i = 0; i < uncompletedTasks.length; i++) {%>
+      <li>
+        <span><%= uncompletedTasks[i].theTask %></span>
+        <span class="fa-solid fa-trash-can"></span>
+      </li>
+      <% } %>
+    </ul>
+
     <!-- Later add number of tasks left -->
     <p>Add new tasks to your list:</p>
     <form action="/addTask" method="POST">
       <input type="text" placeholder="Thing to do" name="todoItem" />
       <input type="submit" value="Add item" />
     </form>
+
+    <script src="main.js"></script>
   </body>
 </html>

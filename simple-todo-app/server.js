@@ -3,8 +3,8 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const MongoClient = require("mongodb").MongoClient;
-const PORT = process.env.PORT || 8000;
 dotenv.config({ path: "config.env" });
+const PORT = process.env.PORT || 8000;
 
 //============Database============
 let db,
@@ -22,22 +22,37 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
 app.set("view engine", "ejs");
 
 //
-app.use(express.static("assets"));
+app.use(express.static(__dirname + "/assets"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //============CRUD============
+
+//READ
 app.get("/", async (request, response) => {
-  // await db.collection('todos')
-  response.render("index.ejs");
+  //Read db for all collections
+  const todos = await db.collection("todos").find().toArray();
+  response.render("index.ejs", { uncompletedTasks: todos });
 });
 
+//CREATE
 app.post("/addTask", (request, response) => {
   db.collection("todos")
     .insertOne({ theTask: request.body.todoItem })
     .then((result) => {
       console.log("Todo Added");
       response.redirect("/");
+    })
+    .catch((error) => console.log(error));
+});
+
+//DELETE
+app.delete("/deleteTask", (request, response) => {
+  db.collection("todos")
+    .deleteOne({ theTask: request.body.itemFromJS })
+    .then((result) => {
+      console.log("todo item deleted");
+      response.json("Todo deleted");
     })
     .catch((error) => console.log(error));
 });
