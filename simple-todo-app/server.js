@@ -38,12 +38,54 @@ app.get("/", async (request, response) => {
 //CREATE
 app.post("/addTask", (request, response) => {
   db.collection("todos")
-    .insertOne({ theTask: request.body.todoItem })
+    .insertOne({ theTask: request.body.todoItem, completed: false })
     .then((result) => {
       console.log("Todo Added");
       response.redirect("/");
     })
     .catch((error) => console.log(error));
+});
+
+app.put("/markComplete", (request, response) => {
+  db.collection("todos")
+    .updateOne(
+      { theTask: request.body.itemFromJS },
+      {
+        $set: {
+          completed: true,
+        },
+      },
+      {
+        sort: { _id: -1 },
+        upsert: false,
+      }
+    )
+    .then((result) => {
+      console.log("Marked Complete");
+      response.json("Marked Complete");
+    })
+    .catch((error) => console.error(error));
+});
+
+app.put("/markUnComplete", (request, response) => {
+  db.collection("todos")
+    .updateOne(
+      { theTask: request.body.itemFromJS },
+      {
+        $set: {
+          completed: false,
+        },
+      },
+      {
+        sort: { _id: -1 },
+        upsert: false,
+      }
+    )
+    .then((result) => {
+      console.log("Marked Complete");
+      response.json("Marked Complete");
+    })
+    .catch((error) => console.error(error));
 });
 
 //DELETE
