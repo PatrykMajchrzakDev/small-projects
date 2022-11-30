@@ -17,8 +17,12 @@
 
     <ul>
       <% for(let i = 0; i < uncompletedTasks.length; i++) {%>
-      <li>
+      <li class="item">
+        <% if(uncompletedTasks[i].completed === true){ %>
+        <span class="completed"><%= uncompletedTasks[i].theTask %></span>
+        <% } else { %>
         <span><%= uncompletedTasks[i].theTask %></span>
+        <% } %>
         <span class="fa-solid fa-trash-can"></span>
       </li>
       <% } %>
